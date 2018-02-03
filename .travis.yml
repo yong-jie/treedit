@@ -10,3 +10,5 @@ install:
   - yarn run heroku-postbuild
 script:
   - yarn run travis
+  - cd client
+  - yarn run travis
