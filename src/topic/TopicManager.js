@@ -28,8 +28,6 @@ class TopicManager {
   createTopic(message) {
     const uid = this.uidGenerator.requestUid();
     const topic = new Topic(message, uid);
-    // TODO: Consider refactoring below two lines to just:
-    // this.lookup[uid] = this.topics.push(topic) - 1;
     const indexOfTopic = this.topics.push(topic) - 1;
     this.lookup[uid] = indexOfTopic;
     this.singleBubbleSort(-1, indexOfTopic);
