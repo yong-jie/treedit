@@ -1,11 +1,13 @@
 class Topic {
   /**
    * @param {string} message
+   * @param {number} id
    */
-  constructor(message) {
+  constructor(message, id) {
     this.message = message;
     this.upvotes = 0;
     this.downvotes = 0;
+    this.id = id;
   }
 
   /**
@@ -34,6 +36,13 @@ class Topic {
    */
   getScore() {
     return this.upvotes - this.downvotes;
+  }
+
+  /**
+   * @return {number} id
+   */
+  getId() {
+    return this.id;
   }
 
   /**

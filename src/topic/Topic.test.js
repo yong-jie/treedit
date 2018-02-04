@@ -1,12 +1,13 @@
 import Topic from './Topic';
 
 describe('Topic', () => {
-  const topic = new Topic('Hello!');
+  const topic = new Topic('Hello!', 1);
 
   it('should initialize properly', () => {
     expect(topic.getDownvotes()).toBe(0);
     expect(topic.getUpvotes()).toBe(0);
     expect(topic.getMessage()).toBe('Hello!');
+    expect(topic.getId()).toBe(1);
   });
 
   it('should upvote and downvote correctly', () => {
