@@ -1,6 +1,10 @@
 import Topic from './Topic';
 import UidGenerator from '../uniqueness/UidGenerator';
 
+// TopicManager.singeBubbleSort parameter directives.
+const SORT_FRONT_TO_BACK = 1;
+const SORT_BACK_TO_FRONT = -1;
+
 class TopicManager {
   constructor() {
     this.topics = [];
@@ -30,7 +34,7 @@ class TopicManager {
     const topic = new Topic(message, uid);
     const indexOfTopic = this.topics.push(topic) - 1;
     this.lookup[uid] = indexOfTopic;
-    this.singleBubbleSort(-1, indexOfTopic);
+    this.singleBubbleSort(SORT_BACK_TO_FRONT, indexOfTopic);
   }
 
   /**
@@ -39,7 +43,7 @@ class TopicManager {
   upvoteTopic(id) {
     const indexOfTopic = this.lookup[id];
     this.topics[indexOfTopic].upvote();
-    this.singleBubbleSort(-1, indexOfTopic);
+    this.singleBubbleSort(SORT_BACK_TO_FRONT, indexOfTopic);
   }
 
   /**
@@ -48,7 +52,7 @@ class TopicManager {
   downvoteTopic(id) {
     const indexOfTopic = this.lookup[id];
     this.topics[indexOfTopic].downvote();
-    this.singleBubbleSort(1, indexOfTopic);
+    this.singleBubbleSort(SORT_FRONT_TO_BACK, indexOfTopic);
   }
 
   /**
@@ -57,17 +61,19 @@ class TopicManager {
    * The inclusion of a direction parameter allows for code reuse between upvote
    * and downvote methods.
    *
-   * @param {number} direction - Direction to 'bubble'. Accepts either 1 or -1.
+   * @param {number} direction - Direction to 'bubble'. Accepts either
+   *  SORT_FRONT_TO_BACK or SORT_BACK_TO_FRONT.
    * @param {number} start - The index to start bubbling from.
    */
   singleBubbleSort(direction, start) {
     let currentIndex = start;
-    const endPoint = direction === 1 ? this.topics.length - 1 : 0;
+    const endPoint = direction === SORT_FRONT_TO_BACK
+      ? this.topics.length - 1 : 0;
     while (currentIndex !== endPoint) {
       const currentTopic = this.topics[currentIndex];
       const nextTopic = this.topics[currentIndex + direction];
-      if ((direction === 1 && currentTopic.getScore() < nextTopic.getScore())
-      || (direction === -1 && currentTopic.getScore() > nextTopic.getScore())) {
+      if ((direction === SORT_FRONT_TO_BACK && currentTopic.getScore() < nextTopic.getScore())
+      || (direction === SORT_BACK_TO_FRONT && currentTopic.getScore() > nextTopic.getScore())) {
         // Conduct the swap
         this.topics[currentIndex] = nextTopic;
         this.topics[currentIndex + direction] = currentTopic;
