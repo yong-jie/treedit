@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import routes from './routes';
+import api from './api/api';
 
 const app = express();
 app.disable('x-powered-by');
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-app.use('/api', routes);
+app.use('/api', api);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -37,11 +37,9 @@ app.use((req, res, next) => {
 
 // Error handler
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  res
-    .status(err.status || 500)
-    .render('error', {
-      message: err.message,
-    });
+  res.status(err.status || 500).render('error', {
+    message: err.message,
+  });
 });
 
 export default app;
