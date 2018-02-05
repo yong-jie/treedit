@@ -67,13 +67,18 @@ class TopicManager {
    */
   singleBubbleSort(direction, start) {
     let currentIndex = start;
-    const endPoint = direction === SORT_FRONT_TO_BACK
-      ? this.topics.length - 1 : 0;
+    const endPoint =
+      direction === SORT_FRONT_TO_BACK ? this.topics.length - 1 : 0;
     while (currentIndex !== endPoint) {
       const currentTopic = this.topics[currentIndex];
       const nextTopic = this.topics[currentIndex + direction];
-      if ((direction === SORT_FRONT_TO_BACK && currentTopic.getScore() < nextTopic.getScore())
-      || (direction === SORT_BACK_TO_FRONT && currentTopic.getScore() > nextTopic.getScore())) {
+      const isValidRightSwap =
+        direction === SORT_FRONT_TO_BACK &&
+        currentTopic.getScore() < nextTopic.getScore();
+      const isValidLeftSwap =
+        direction === SORT_BACK_TO_FRONT &&
+        currentTopic.getScore() > nextTopic.getScore();
+      if (isValidRightSwap || isValidLeftSwap) {
         // Conduct the swap
         this.topics[currentIndex] = nextTopic;
         this.topics[currentIndex + direction] = currentTopic;
