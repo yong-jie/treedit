@@ -48,3 +48,36 @@ describe('POST /api/topic/create', () => {
     expect(result[1].score).toBe(0);
   });
 });
+
+describe('POST /api/topic/upvote', () => {
+  it('should upvote second topic and shift it to the front of the array', async () => {
+    const response = await request(app)
+      .post('/api/topic/upvote')
+      .type('form')
+      .send({ id: 2 })
+      .set('Accept', /application\/json/);
+    const { success, result } = response.body;
+    expect(success).toBe(true);
+    expect(result.length).toBe(2);
+    expect(result[0].id).toBe(2);
+  });
+});
+
+describe('POST /api/topic/downvote', () => {
+  it('should downvote second topic and shift it to the back of the array', async () => {
+    let response = await request(app)
+      .post('/api/topic/downvote')
+      .type('form')
+      .send({ id: 2 })
+      .set('Accept', /application\/json/);
+    response = await request(app)
+      .post('/api/topic/downvote')
+      .type('form')
+      .send({ id: 2 })
+      .set('Accept', /application\/json/);
+    const { success, result } = response.body;
+    expect(success).toBe(true);
+    expect(result.length).toBe(2);
+    expect(result[1].id).toBe(2);
+  });
+});
