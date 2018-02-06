@@ -17,9 +17,10 @@ routes.get('/topic/list/:page', (req, res) => {
  * POST /topic/create create a new topic with given message
  */
 routes.post('/topic/create', (req, res) => {
-  const { message } = req.body;
+  const { message, page } = req.body;
+  const requestedPage = parseInt(page, 10) || 1;
   topicManager.createTopic(message);
-  const retrievedTopics = topicManager.listTopics(20, 1);
+  const retrievedTopics = topicManager.listTopics(20, requestedPage);
   res.json({ success: true, result: retrievedTopics });
 });
 
@@ -27,9 +28,10 @@ routes.post('/topic/create', (req, res) => {
  * POST /topic/upvote upvote topic of given id
  */
 routes.post('/topic/upvote', (req, res) => {
-  const { id } = req.body;
+  const { id, page } = req.body;
+  const requestedPage = parseInt(page, 10) || 1;
   topicManager.upvoteTopic(parseInt(id, 10));
-  const retrievedTopics = topicManager.listTopics(20, 1);
+  const retrievedTopics = topicManager.listTopics(20, requestedPage);
   res.json({ success: true, result: retrievedTopics });
 });
 
@@ -37,9 +39,10 @@ routes.post('/topic/upvote', (req, res) => {
  * POST /topic/downvote downvote topic of given id
  */
 routes.post('/topic/downvote', (req, res) => {
-  const { id } = req.body;
+  const { id, page } = req.body;
+  const requestedPage = parseInt(page, 10) || 1;
   topicManager.downvoteTopic(parseInt(id, 10));
-  const retrievedTopics = topicManager.listTopics(20, 1);
+  const retrievedTopics = topicManager.listTopics(20, requestedPage);
   res.json({ success: true, result: retrievedTopics });
 });
 
