@@ -35,7 +35,7 @@ describe('POST /api/topic/create', () => {
     const response = await request(app)
       .post('/api/topic/create')
       .type('form')
-      .send({ message: 'Hello2' })
+      .send({ message: 'Hello2', page: 1 })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);
@@ -54,7 +54,7 @@ describe('POST /api/topic/upvote', () => {
     const response = await request(app)
       .post('/api/topic/upvote')
       .type('form')
-      .send({ id: 2 })
+      .send({ id: 2, page: 1 })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);
@@ -68,12 +68,12 @@ describe('POST /api/topic/downvote', () => {
     let response = await request(app)
       .post('/api/topic/downvote')
       .type('form')
-      .send({ id: 2 })
+      .send({ id: 2, page: 1 })
       .set('Accept', /application\/json/);
     response = await request(app)
       .post('/api/topic/downvote')
       .type('form')
-      .send({ id: 2 })
+      .send({ id: 2, page: 1 })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);
