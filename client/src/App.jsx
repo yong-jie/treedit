@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import TopicList from './Topic/TopicList';
-import { fetchTopics } from './api';
+import TopicSubmission from './Topic/TopicSubmission';
+import { fetchTopics, createTopic } from './api';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       topics: [],
+      currentPage: 1,
     };
+    this.makeTopic = this.makeTopic.bind(this);
   }
 
   componentDidMount() {
-    this.retrieveTopics(1);
+    this.retrieveTopics(this.state.currentPage);
   }
 
   retrieveTopics(page) {
     fetchTopics(page)
+      .then(response => this.setState({
+        topics: response.body.result,
+      }));
+  }
+
+  makeTopic(message) {
+    createTopic(message, this.state.currentPage)
       .then(response => this.setState({
         topics: response.body.result,
       }));
@@ -29,6 +39,7 @@ class App extends Component {
           <p>Header</p>
         </header>
         <TopicList topics={this.state.topics} />
+        <TopicSubmission makeTopic={this.makeTopic} />
       </div>
     );
   }

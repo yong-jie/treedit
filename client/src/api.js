@@ -8,7 +8,8 @@ const makeRequest = (url, options) => {
   };
 
   if (data) {
-    fetchParams.body = JSON.stringify(data);
+    const dataWrapper = { data };
+    fetchParams.body = JSON.stringify(dataWrapper);
   }
 
   return fetch(url, fetchParams)
@@ -25,9 +26,9 @@ export const fetchTopics = (page) => {
   return makeRequest(url, options);
 };
 
-export const createTopic = () => {
+export const createTopic = (message, page) => {
   const url = '/api/topic/create';
-  const data = {};
+  const data = { message, page };
   const options = {
     method: 'POST',
     data,
