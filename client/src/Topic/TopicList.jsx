@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ListGroup, ListGroupItem } from 'reactstrap';
+import './TopicList.css';
 
 const TopicList = ({ topics }) => {
   const mappedTopics = topics.map(topic => (
-    <li key={topic.id.toString()}>
+    <ListGroupItem key={topic.id.toString()}>
       {topic.message}
-    </li>
+    </ListGroupItem>
   ));
   return (
-    <ul>
+    <ListGroup>
       {mappedTopics}
-    </ul>
+    </ListGroup>
   );
 };
 
