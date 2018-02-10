@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TopicList from './Topic/TopicList';
 import TopicSubmission from './Topic/TopicSubmission';
-import { fetchTopics, createTopic } from './api';
+import { fetchTopics, createTopic, upvoteTopic, downvoteTopic } from './api';
 import './App.css';
 
 class App extends Component {
@@ -12,6 +12,8 @@ class App extends Component {
       currentPage: 1,
     };
     this.makeTopic = this.makeTopic.bind(this);
+    this.upvote = this.upvote.bind(this);
+    this.downvote = this.downvote.bind(this);
   }
 
   componentDidMount() {
@@ -32,13 +34,31 @@ class App extends Component {
       }));
   }
 
+  upvote(id) {
+    upvoteTopic(id, this.state.currentPage)
+      .then(response => this.setState({
+        topics: response.body.result,
+      }));
+  }
+
+  downvote(id) {
+    downvoteTopic(id, this.state.currentPage)
+      .then(response => this.setState({
+        topics: response.body.result,
+      }));
+  }
+
   render() {
     return (
       <div className="App">
         <header>
           <p>Header</p>
         </header>
-        <TopicList topics={this.state.topics} />
+        <TopicList
+          topics={this.state.topics}
+          upvote={this.upvote}
+          downvote={this.downvote}
+        />
         <TopicSubmission makeTopic={this.makeTopic} />
       </div>
     );

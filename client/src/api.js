@@ -35,3 +35,23 @@ export const createTopic = (message, page) => {
   };
   return makeRequest(url, options);
 };
+
+export const upvoteTopic = (id, page) => {
+  const url = '/api/topic/upvote';
+  const data = { id, page };
+  const options = {
+    method: 'POST',
+    data,
+  };
+  return makeRequest(url, options);
+};
+
+export const downvoteTopic = (id, page) => {
+  const url = '/api/topic/downvote';
+  const data = { id, page };
+  const options = {
+    method: 'POST',
+    data,
+  };
+  return makeRequest(url, options);
+};
