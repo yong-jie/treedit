@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Button, Input } from 'reactstrap';
+import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 class TopicSubmission extends Component {
@@ -35,7 +35,12 @@ class TopicSubmission extends Component {
     return (
       <Form>
         <FormGroup>
+          <Label for="topicSubmission">
+            What&apos;s on your mind today?
+          </Label>
           <Input
+            type="textarea"
+            id="topicSubmission"
             onChange={this.handleOnChange}
             value={this.state.inputMessage}
           />
