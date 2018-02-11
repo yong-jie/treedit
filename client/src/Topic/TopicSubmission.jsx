@@ -45,7 +45,9 @@ class TopicSubmission extends Component {
             value={this.state.inputMessage}
           />
         </FormGroup>
-        <Button onClick={this.handleOnClick}>Submit</Button>
+        <div className="text-right">
+          <Button onClick={this.handleOnClick}>Submit</Button>
+        </div>
       </Form>
     );
   }

@@ -1,3 +1,12 @@
+.list-group {
+  margin-bottom: 30px;
+}
+
 .list-group-item {
-  word-wrap: break-word
+  word-wrap: break-word;
+  margin-bottom: 20px;
+}
+
+.top-margin {
+  margin-top: 10px;
 }
