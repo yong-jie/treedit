@@ -46,7 +46,7 @@ class TopicSubmission extends Component {
           />
         </FormGroup>
         <div className="text-right">
-          <Button onClick={this.handleOnClick}>Submit</Button>
+          <Button color="success" onClick={this.handleOnClick}>Submit</Button>
         </div>
       </Form>
     );
