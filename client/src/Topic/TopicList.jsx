@@ -7,11 +7,13 @@ const TopicList = ({ topics, upvote, downvote }) => {
   const mappedTopics = topics.map(topic => (
     <ListGroupItem key={topic.id.toString()}>
       {topic.message}
-      <ButtonGroup>
-        <Button onClick={() => upvote(topic.id)}>Upvote</Button>
-        {topic.score}
-        <Button onClick={() => downvote(topic.id)}>Downvote</Button>
-      </ButtonGroup>
+      <div className="text-right top-margin">
+        <ButtonGroup>
+          <Button onClick={() => upvote(topic.id)}>Upvote</Button>
+          {topic.score}
+          <Button onClick={() => downvote(topic.id)}>Downvote</Button>
+        </ButtonGroup>
+      </div>
     </ListGroupItem>
   ));
   return (
