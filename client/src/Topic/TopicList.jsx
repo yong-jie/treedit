@@ -9,9 +9,9 @@ const TopicList = ({ topics, upvote, downvote }) => {
       {topic.message}
       <div className="text-right top-margin">
         <ButtonGroup>
-          <Button onClick={() => upvote(topic.id)}>Upvote</Button>
-          {topic.score}
-          <Button onClick={() => downvote(topic.id)}>Downvote</Button>
+          <Button color="info" onClick={() => upvote(topic.id)}>Upvote</Button>
+          <span className="score">{topic.score}</span>
+          <Button color="info" onClick={() => downvote(topic.id)}>Downvote</Button>
         </ButtonGroup>
       </div>
     </ListGroupItem>
