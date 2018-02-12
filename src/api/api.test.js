@@ -49,8 +49,7 @@ describe('POST /api/topic/create', () => {
   it('should fail to create a topic that has a message of > 255 characters', async () => {
     const response = await request(app)
       .post('/api/topic/create')
-      .type('form')
-      .send({ message: 'a'.repeat(300), page: 1 })
+      .send({ data: { message: 'a'.repeat(300), page: 1 } })
       .set('Accept', /application\/json/);
     const { success } = response.body;
     expect(success).toBe(false);

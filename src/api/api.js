@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import TopicManager from '../topic/TopicManager';
-import { success } from './resultWrapper';
+import { success, error } from './resultWrapper';
 
 const routes = Router();
 const topicManager = new TopicManager();
@@ -27,14 +27,15 @@ routes.post('/topic/create', (req, res) => {
   const { message, page } = req.body.data;
   const requestedPage = parseInt(page, 10) || 1;
   if (message.length > 255) {
-    return res.json(error('Message should be no longer than 255 characters!'));
+    res.json(error('Message should be no longer than 255 characters!'));
+  } else {
+    topicManager.createTopic(message);
+    const retrievedTopics = topicManager.listTopics(
+      NUMBER_OF_TOPICS_PER_PAGE,
+      requestedPage,
+    );
+    res.json(success(retrievedTopics));
   }
-  topicManager.createTopic(message);
-  const retrievedTopics = topicManager.listTopics(
-    NUMBER_OF_TOPICS_PER_PAGE,
-    requestedPage,
-  );
-  res.json(success(retrievedTopics));
 });
 
 /**
