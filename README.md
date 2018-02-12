@@ -9,6 +9,29 @@ The skeleton of the repository was generated with [express-babel](https://github
 ## License
 To respect express-babel's MIT license, the code in this repository will also follow the MIT license.
 
+# Installation
+Start by cloning the repository:
+```sh
+git clone https://github.com/yong-jie/treedit.git
+```
+Enter the repository:
+```sh
+cd treedit
+```
+Install dependencies on both backend and frontend:
+```sh
+npm install && cd client && npm install && cd ..
+```
+Build backend and frontend:
+```sh
+npm run build-all
+```
+Start the server:
+```sh
+npm start
+```
+
+
 # Repository Structure
 This repository contains code for the backend(powered by express), and frontend (react) located in the client directory. This structure was chosen because it decouples both the code for the frontend and backend. As the web application scales in complexity, separating these two components will be as simple as moving the client directory out of the repository.
 
