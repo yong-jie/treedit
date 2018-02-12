@@ -20,8 +20,7 @@ describe('POST /api/topic/create', () => {
   it('should successfully create a topic and list it correctly', async () => {
     const response = await request(app)
       .post('/api/topic/create')
-      .type('form')
-      .send({ message: 'Hello' })
+      .send({ data: { message: 'Hello' } })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);
@@ -34,8 +33,7 @@ describe('POST /api/topic/create', () => {
   it('should successfully create a second topic and list it correctly', async () => {
     const response = await request(app)
       .post('/api/topic/create')
-      .type('form')
-      .send({ message: 'Hello2', page: 1 })
+      .send({ data: { message: 'Hello2', page: 1 } })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);
@@ -63,8 +61,7 @@ describe('POST /api/topic/upvote', () => {
   it('should upvote second topic and shift it to the front of the array', async () => {
     const response = await request(app)
       .post('/api/topic/upvote')
-      .type('form')
-      .send({ id: 2, page: 1 })
+      .send({ data: { id: 2, page: 1 } })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);
@@ -77,13 +74,11 @@ describe('POST /api/topic/downvote', () => {
   it('should downvote second topic and shift it to the back of the array', async () => {
     let response = await request(app)
       .post('/api/topic/downvote')
-      .type('form')
-      .send({ id: 2, page: 1 })
+      .send({ data: { id: 2, page: 1 } })
       .set('Accept', /application\/json/);
     response = await request(app)
       .post('/api/topic/downvote')
-      .type('form')
-      .send({ id: 2, page: 1 })
+      .send({ data: { id: 2, page: 1 } })
       .set('Accept', /application\/json/);
     const { success, result } = response.body;
     expect(success).toBe(true);

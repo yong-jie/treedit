@@ -1,0 +1,18 @@
+.list-group {
+  margin-bottom: 30px;
+}
+
+.list-group-item {
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  background-color: #f2f4f5;
+}
+
+.top-margin {
+  margin-top: 10px;
+}
+
+.score {
+  padding: 6px 10px 0px 10px;
+  border: 1px solid #17a2b8;
+}
