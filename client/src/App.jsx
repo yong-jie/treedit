@@ -51,9 +51,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <p>Header</p>
-        </header>
         <TopicList
           topics={this.state.topics}
           upvote={this.upvote}
