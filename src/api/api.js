@@ -6,12 +6,17 @@ import { success } from './resultWrapper';
 const routes = Router();
 const topicManager = new TopicManager();
 
+const NUMBER_OF_TOPICS_PER_PAGE = 20;
+
 /**
  * GET /topic/list/:page list of topics in specified page number.
  */
 routes.get('/topic/list/:page', (req, res) => {
   const { page } = req.params;
-  const retrievedTopics = topicManager.listTopics(20, parseInt(page, 10));
+  const retrievedTopics = topicManager.listTopics(
+    NUMBER_OF_TOPICS_PER_PAGE,
+    parseInt(page, 10),
+  );
   res.json(success(retrievedTopics));
 });
 
@@ -22,7 +27,10 @@ routes.post('/topic/create', (req, res) => {
   const { message, page } = req.body.data;
   const requestedPage = parseInt(page, 10) || 1;
   topicManager.createTopic(message);
-  const retrievedTopics = topicManager.listTopics(20, requestedPage);
+  const retrievedTopics = topicManager.listTopics(
+    NUMBER_OF_TOPICS_PER_PAGE,
+    requestedPage,
+  );
   res.json(success(retrievedTopics));
 });
 
@@ -33,7 +41,10 @@ routes.post('/topic/upvote', (req, res) => {
   const { id, page } = req.body.data;
   const requestedPage = parseInt(page, 10) || 1;
   topicManager.upvoteTopic(parseInt(id, 10));
-  const retrievedTopics = topicManager.listTopics(20, requestedPage);
+  const retrievedTopics = topicManager.listTopics(
+    NUMBER_OF_TOPICS_PER_PAGE,
+    requestedPage,
+  );
   res.json(success(retrievedTopics));
 });
 
@@ -44,7 +55,10 @@ routes.post('/topic/downvote', (req, res) => {
   const { id, page } = req.body.data;
   const requestedPage = parseInt(page, 10) || 1;
   topicManager.downvoteTopic(parseInt(id, 10));
-  const retrievedTopics = topicManager.listTopics(20, requestedPage);
+  const retrievedTopics = topicManager.listTopics(
+    NUMBER_OF_TOPICS_PER_PAGE,
+    requestedPage,
+  );
   res.json(success(retrievedTopics));
 });
 

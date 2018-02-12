@@ -24,6 +24,8 @@ class TopicSubmission extends Component {
     if (this.isWithinRange()) {
       this.props.makeTopic(this.state.inputMessage);
       this.setState({ inputMessage: '' });
+    } else if (this.state.inputMessage.length > 255) {
+      alert('Message must be less than 255 characters long!');
     }
   }
 
