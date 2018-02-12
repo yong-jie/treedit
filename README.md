@@ -3,6 +3,8 @@
 
 Reddit / Digg clone for Carousell's coding challenge.
 
+A demonstration can be found on https://why-are-trees-inverted-irl.herokuapp.com.
+
 # Code Ownership
 The skeleton of the repository was generated with [express-babel](https://github.com/vmasto/express-babel) and [create-react-app](https://github.com/facebook/create-react-app). I take ownership and accountability over all other lines of code (all commits apart from initial commit, including all branches) in this repository.
 
