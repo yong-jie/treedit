@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Reddit/Digg clone",
   "repository": "",
-  "author": "Foo Yong Jie <viorama@gmail.com>",
+  "author": "Foo Yong Jie <yong_jie@u.nus.edu>",
   "license": "MIT",
   "main": "dist/index.js",
   "engines": {
@@ -11,13 +11,13 @@
     "npm": ">=3.10.0"
   },
   "scripts": {
-    "prestart": "npm run -s build-backend",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.js --exec \"node -r dotenv/config -r babel-register\"",
     "clean": "rimraf dist",
-    "build-backend": "yarn run clean && mkdir -p dist && babel src -s -D -d dist",
-    "build-all": "yarn run build-backend && cd client && yarn --production=false && yarn run build",
-    "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
+    "build-backend": "npm run clean && mkdir -p dist && babel src -s -D -d dist",
+    "build-frontend": "cd client && npm run build",
+    "build-all": "npm run build-backend && npm run build-frontend",
+    "heroku-postbuild": "npm run build-backend && cd client && npm install && npm run build",
     "test": "jest --watch",
     "lint": "esw -w src test client/src",
     "travis": "jest"
