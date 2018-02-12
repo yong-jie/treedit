@@ -47,6 +47,16 @@ describe('POST /api/topic/create', () => {
     expect(result[1].message).toBe('Hello2');
     expect(result[1].score).toBe(0);
   });
+
+  it('should fail to create a topic that has a message of > 255 characters', async () => {
+    const response = await request(app)
+      .post('/api/topic/create')
+      .type('form')
+      .send({ message: 'a'.repeat(300), page: 1 })
+      .set('Accept', /application\/json/);
+    const { success } = response.body;
+    expect(success).toBe(false);
+  });
 });
 
 describe('POST /api/topic/upvote', () => {

@@ -17,7 +17,6 @@ class TopicManager {
    * @param {number} page - The page number to return.
    */
   listTopics(n, page) {
-    // TODO: Speed this method up. Currently using naive approach.
     const retrievedTopics = this.topics.slice((page - 1) * n, page * n);
     return retrievedTopics.map(topic => ({
       id: topic.getId(),

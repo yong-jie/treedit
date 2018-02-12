@@ -21,6 +21,9 @@ routes.get('/topic/list/:page', (req, res) => {
 routes.post('/topic/create', (req, res) => {
   const { message, page } = req.body;
   const requestedPage = parseInt(page, 10) || 1;
+  if (message.length > 255) {
+    return res.json(error('Message should be no longer than 255 characters!'));
+  }
   topicManager.createTopic(message);
   const retrievedTopics = topicManager.listTopics(20, requestedPage);
   res.json(success(retrievedTopics));
