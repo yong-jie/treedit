@@ -7,7 +7,7 @@ install:
   - cd client
   - yarn install
   - cd ..
-  - yarn run heroku-postbuild
+  - yarn run build-all
 script:
   - yarn run travis
   - cd client
